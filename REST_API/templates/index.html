@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+</head>
+<body>
+    <h1>Blog Posts</h1>
+    {% for post in posts %}
+        <div>
+            <h2>Post {{ post.id }}</h2>
+            <p>{{ post.content }}</p>
+            <p>Created at: {{ post.created_at }}</p>
+        </div>
+    {% endfor %}
+    {% if current_user.is_authenticated %}
+        <form action="{{ url_for('create_post_form') }}" method="POST">
+            <textarea name="content" placeholder="Write your post..." required></textarea>
+            <button type="submit">Create Post</button>
+        </form>
+    {% endif %}
+    <p><a href="{{ url_for('logout') }}">Logout</a></p>
+</body>
+</html>
